@@ -1,20 +1,35 @@
 package com.abolkog.springboot_essat.todo_api.todos;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection ="todos")
 public class Todo {
-	
-	private int id;
+	@Id
+	private String id;
+	@NotNull(message="Title is required")
+	@Size(min=3,message="at least equal 3")
 	private String title;
+	@NotNull(message="Description is required")
 	private String description;
-	public Todo(int id, String title, String description) {
+	private long timestamp;
+	public Todo(String id, String title, String description) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.description = description;
+		this.timestamp=System.currentTimeMillis();
 	}
-	public int getId() {
+	public Todo() {
+		this.timestamp=System.currentTimeMillis();
+	}
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getTitle() {
@@ -28,6 +43,12 @@ public class Todo {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public long getTimestamp() {
+		return timestamp;
+	}
+	public void setTimestamp(long timestamp) {
+		this.timestamp = timestamp;
 	}
 	
 

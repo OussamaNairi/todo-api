@@ -1,33 +1,36 @@
 package com.abolkog.springboot_essat.todo_api.todos;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class TodoService {
-	public List<Todo> data=Arrays.asList(
-		     new Todo(1,"First Todo","Do my homework"),
-		     new Todo(2,"Second Todo","Do my homework"),
-		     new Todo(3,"Third Todo","Do my homework"),
-		     new Todo(4,"Fourth Todo","Do my homework"),
-		     new Todo(5,"Fifth Todo","Do my homework")
-			
-			);
+	@Autowired
+	private TodoRepository todoRepository;
+	
+
 	
 	public List<Todo> findAll(){
-		    return data;
+		    return todoRepository.findAll();
 			
 	}
 
-	public Todo getById(int id) {
+	public Todo getById(String id) {
 		// TODO Auto-generated method stub
-		for(Todo todo:data) {
-			
-			if (todo.getId()==id) return todo;
-		}
-		return null;
+		return todoRepository.findById(id).get();
+	}
+	public Todo save(Todo todo) {
+		return todoRepository.insert(todo);
+		
+	}
+	public void delete(String id) {
+    todoRepository.deleteById(id);
+		
+		
 	}
 
 }
