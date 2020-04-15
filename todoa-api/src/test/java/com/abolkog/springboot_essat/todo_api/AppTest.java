@@ -1,4 +1,4 @@
-package com.abolkog.springboot_essat.todoa_api;
+package com.abolkog.springboot_essat.todo_api;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
